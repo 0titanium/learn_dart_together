@@ -9,6 +9,7 @@ void main() {
           await ResultsRepoImpl(ResultsApi()).getPhotos('yellow flowers');
 
       // print(photoList.runtimeType);
+      // success or error로 다운캐스팅을 해야 data나 error에 접근할 수 있다.
 
       expect(photoList.runtimeType.toString() != '_\$ErrorImpl<List<Photo>>',
           true);
