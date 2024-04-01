@@ -12,10 +12,15 @@ class ResultsRepoImpl implements ResultsRepository {
   ResultsRepoImpl(this._api);
 
   @override
-  Future<Results> getResults(String query) async {
-    final resultsDto = await _api.getResults(query);
+  Future<Result<Results>> getResults(String query) async {
+    try {
+      final resultsDto = await _api.getResults(query);
+      final result = resultsDto.toResults();
 
-    return resultsDto.toResults();
+      return Result.success(result);
+    } catch (e) {
+      return Result.error('알 수 없는 에러');
+    }
   }
 
   @override
