@@ -8,15 +8,20 @@ void main() {
       final photoList =
           await ResultsRepoImpl(ResultsApi()).getPhotos('yellow flowers');
 
+      // print(photoList.runtimeType);
+
       expect(photoList.runtimeType.toString() != '_\$ErrorImpl<List<Photo>>',
           true);
     });
 
-    test('-바보-로 검색하면 에러가 나는지 테스트', () async {
+    test('-바보-로 검색하면 -비속어를 사용할 수 없습니다- 메시지를 리턴', () async {
+      final expected = '비속어를 사용할 수 없습니다.';
       final photoList = await ResultsRepoImpl(ResultsApi()).getPhotos('바보');
 
-      expect(photoList.runtimeType.toString() == '_\$ErrorImpl<List<Photo>>',
-          true);
+      final error = photoList.whenOrNull(error: (e) => e);
+      expect(error, expected);
+      // expect(photoList.runtimeType.toString() == '_\$ErrorImpl<List<Photo>>',
+      //     true);
     });
 
     // test('try - catch 로 에러 검출시 -알 수 없는 네트워크 에러- 메시지를 리턴', () async {
