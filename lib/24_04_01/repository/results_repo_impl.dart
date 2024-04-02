@@ -26,7 +26,8 @@ class ResultsRepoImpl implements ResultsRepository {
   @override
   Future<Result<List<Photo>>> getPhotos(String query) async {
     try {
-      if (query == '바보') {
+      // == 비교는 불완전
+      if (query.contains('바보')) {
         return Result.error('비속어를 사용할 수 없습니다.');
       }
       final resultsDto = await _api.getResults(query);
